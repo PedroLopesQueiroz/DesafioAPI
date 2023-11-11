@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  back-end:
+    build:
+      context: ./back-end
+    ports:
+      - "4000:4000"  # Expose the back-end on port 4000
+    depends_on:
+      - database
+    environment:
+      DATABASE_URL: postgres://postgres:131011@database:5432/datapedro
+      # Other environment variables your back-end might need
+
+  front-end:
+    build:
+      context: ./front-end
+    ports:
+      - "3000:3000"  # Expose the fron-tend on port 3000
+
+  database:
+    image: postgres:latest  # Or the specific version you require
+    environment:
+      POSTGRES_DB: datapedro
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 131011
+    ports:
+      - "5432:5432"  # Default port for Postgres
+    volumes:
+      - ./back-end/database:/docker-entrypoint-initdb.d
+      - postgres_data:/var/lib/postgresql/data
+    # Postgres will run any .sql files found in this directory on startup
+
+volumes:
+  postgres_data:
+    # This named volume will store the Postgres data
