@@ -1,7 +1,7 @@
 # DesafioAPI
 Autor: Pedro Lopes Queiroz
 
-Para rodar a aplicação multi-container:
+Para rodar a aplicação multi-container: <br / >
 -Na Root folder da aplicação, execute o comando: "docker compose up -d".
 
 Observações:
